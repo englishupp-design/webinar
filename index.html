@@ -7,152 +7,359 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    body { box-sizing: border-box; font-family: "Montserrat", sans-serif; }
+    /* ── Palette ─────────────────────────────
+       Teal:    #4a8b8c / #335f60
+       Beige:   #d4a882 / #c8916a
+       Cream:   #f5ede3
+       Bg:      #e8f0ef
+    ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: "Montserrat", sans-serif; background: #e8f0ef; margin: 0; }
     .heading-font { font-family: "Playfair Display", serif; }
-    .gradient-bg { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
-    .section-card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .section-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
-    .cta-button { background: linear-gradient(135deg, #2c5f7c 0%, #1e4158 100%); transition: all 0.3s ease; }
-    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(44,95,124,0.3); }
-    .icon-box { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #2c5f7c 0%, #1e4158 100%); color: white; font-size: 24px; margin-bottom: 16px; }
-    .speaker-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
-    .speaker-card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
-    .speaker-img { width: 280px; height: 280px; object-fit: cover; border-radius: 50%; margin: 20px auto; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .accent-line { width: 60px; height: 4px; background: linear-gradient(90deg, #2c5f7c 0%, #4a90b8 100%); margin: 24px auto; }
-    .hero-section { position: relative; overflow: hidden; }
-    .hero-decor { position: absolute; border-radius: 999px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(76,136,176,0.3)); filter: blur(2px); pointer-events: none; z-index: 0; }
-    .hero-decor-1 { width: 320px; height: 320px; top: -80px; right: -60px; opacity: 0.5; }
-    .hero-decor-2 { width: 220px; height: 220px; bottom: -60px; left: -40px; opacity: 0.45; }
-    .hero-decor-3 { width: 140px; height: 140px; top: 40px; left: 10%; opacity: 0.35; }
-    @media (max-width: 768px) { .speaker-img { width: 240px; height: 240px; } }
+
+    /* Cards */
+    .section-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(74,139,140,0.08); transition: transform .3s, box-shadow .3s; }
+    .section-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(74,139,140,0.15); }
+
+    /* Buttons */
+    .cta-button { background: linear-gradient(135deg,#4a8b8c,#335f60); transition: all .3s; display: inline-block; }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(74,139,140,.4); }
+
+    /* Icon boxes */
+    .icon-box { display:inline-flex; align-items:center; justify-content:center; width:64px; height:64px; border-radius:18px; background:linear-gradient(135deg,#4a8b8c,#335f60); color:#fff; margin-bottom:16px; box-shadow:0 6px 16px rgba(74,139,140,.3); }
+
+    /* Speaker */
+    .speaker-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 12px rgba(74,139,140,.08); transition:transform .3s; }
+    .speaker-card:hover { transform:translateY(-8px); box-shadow:0 16px 32px rgba(74,139,140,.18); }
+    .speaker-img { width:260px; height:260px; object-fit:cover; border-radius:50%; margin:24px auto; display:block; box-shadow:0 4px 14px rgba(74,139,140,.2); border: 4px solid #f5ede3; }
+
+    /* Accent line — beige */
+    .accent-line { width:60px; height:4px; background:linear-gradient(90deg,#d4a882,#e8c4a0); border-radius:2px; margin:24px auto; }
+
+    /* Badge */
+    .badge { background:linear-gradient(135deg,#d4a882,#c8916a); }
+
+    /* Highlight box */
+    .highlight-box { background:linear-gradient(135deg,#ddeae9,#cde0df); border-left:4px solid #d4a882; }
+
+    /* Colors */
+    .check-icon { color:#d4a882; }
+    .num-bubble { background:linear-gradient(135deg,#4a8b8c,#335f60); }
+    .bg-cream { background:#f5ede3; }
+    .bg-light { background:#e8f0ef; }
+    .bg-white-sec { background:#fff; }
+
+    /* Countdown */
+    .countdown-wrap { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:18px; }
+    .countdown-box { background:linear-gradient(135deg,#4a8b8c,#335f60); color:#fff; border-radius:14px; padding:14px 20px; min-width:76px; text-align:center; box-shadow:0 4px 14px rgba(74,139,140,.3); }
+    .countdown-num { font-size:2rem; font-weight:700; line-height:1; font-family:"Playfair Display",serif; }
+    .countdown-label { font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; opacity:.85; margin-top:4px; }
+    .countdown-sep { font-size:2rem; font-weight:700; color:#4a8b8c; align-self:center; padding-bottom:18px; }
+
+    /* Reviews */
+    .review-card { background:#f5ede3; border-radius:16px; box-shadow:0 4px 12px rgba(212,168,130,.12); padding:28px; transition:transform .3s,box-shadow .3s; }
+    .review-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(212,168,130,.22); }
+    .stars { color:#d4a882; font-size:1.25rem; letter-spacing:2px; margin-bottom:14px; }
+    .review-text { font-style:italic; color:#5a4a3a; line-height:1.7; margin-bottom:16px; }
+    .review-author { font-weight:600; color:#335f60; }
+
+    /* ── DECORATIVE ELEMENTS ────────────────── */
+
+    /* Dot grid pattern */
+    .dot-grid {
+      position:absolute; inset:0; pointer-events:none; z-index:0;
+      background-image: radial-gradient(circle, rgba(74,139,140,0.2) 1.5px, transparent 1.5px);
+      background-size: 26px 26px;
+    }
+    .dot-grid-beige {
+      position:absolute; inset:0; pointer-events:none; z-index:0;
+      background-image: radial-gradient(circle, rgba(212,168,130,0.25) 1.5px, transparent 1.5px);
+      background-size: 26px 26px;
+    }
+
+    /* Organic blob shapes */
+    .blob { position:absolute; pointer-events:none; z-index:0; }
+
+    /* Section wrapper */
+    .sec-rel { position:relative; overflow:hidden; }
+
+    /* Floating EQ */
+    .bg-float-layer { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .bg-float { position:absolute; opacity:.055; color:#335f60; }
+    .bg-float.is-text { font-family:"Playfair Display",serif; font-weight:700; line-height:1; }
+    body > *:not(.bg-float-layer) { position:relative; z-index:1; }
+
+    @media(max-width:768px){ .speaker-img{ width:200px; height:200px; } }
   </style>
 </head>
-<body class="gradient-bg">
+<body>
 
-  <!-- Hero -->
-  <section class="w-full py-16 px-6 hero-section">
-    <div class="hero-decor hero-decor-1"></div>
-    <div class="hero-decor hero-decor-2"></div>
-    <div class="hero-decor hero-decor-3"></div>
-    <div class="relative max-w-5xl mx-auto text-center z-10">
-      <div class="inline-block px-4 py-2 bg-white rounded-full shadow-sm mb-6">
-        <span class="text-sm font-semibold tracking-wide uppercase" style="color: #2c5f7c;">Бесплатный Вебинар</span>
+  <div class="bg-float-layer" id="bgFloatLayer"></div>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="sec-rel w-full py-16 px-6" style="background:linear-gradient(150deg,#e8f0ef 0%,#ddeae9 55%,#f0e8df 100%);">
+
+    <!-- dot grid top-right corner area only -->
+    <div style="position:absolute;top:0;right:0;width:260px;height:260px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid" style="inset:0;"></div>
+    </div>
+    <!-- dot grid bottom-left -->
+    <div style="position:absolute;bottom:0;left:0;width:200px;height:180px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid" style="inset:0;"></div>
+    </div>
+
+    <!-- Blob top-right — teal -->
+    <svg class="blob" style="top:-60px;right:-70px;width:320px;opacity:.18;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4a8b8c" d="M44.8,-67.2C56.6,-58.2,63,-43.2,68.2,-28C73.4,-12.8,77.4,2.6,73.6,16.2C69.8,29.8,58.2,41.6,45.2,51.6C32.2,61.6,17.8,69.8,1.4,68C-15,66.2,-33.2,54.4,-46.2,40.8C-59.2,27.2,-67,11.8,-67.6,-4C-68.2,-19.8,-61.6,-36,-50.4,-47.2C-39.2,-58.4,-23.4,-64.6,-6.2,-67.2C11,-69.8,33,-76.2,44.8,-67.2Z" transform="translate(100 100)"/>
+    </svg>
+
+    <!-- Blob bottom-left — beige -->
+    <svg class="blob" style="bottom:-50px;left:-60px;width:260px;opacity:.22;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#d4a882" d="M38.5,-55.5C49.4,-47.2,57.4,-35.2,62.2,-21.6C67,-8,68.6,7.2,63.8,20.2C59,33.2,47.8,44,35.2,52.4C22.6,60.8,8.6,66.8,-6.8,66.6C-22.2,66.4,-38.8,60,-50.6,49C-62.4,38,-69.4,22.4,-69.8,6.8C-70.2,-8.8,-64,-24.4,-54,-36.4C-44,-48.4,-30.2,-56.8,-16.2,-60.2C-2.2,-63.6,12,-63.8,38.5,-55.5Z" transform="translate(100 100)"/>
+    </svg>
+
+    <!-- Small decorative circle accents -->
+    <div style="position:absolute;top:24px;left:8%;width:14px;height:14px;border-radius:50%;background:#d4a882;opacity:.35;pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;top:60px;left:6%;width:8px;height:8px;border-radius:50%;background:#4a8b8c;opacity:.3;pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;bottom:40px;right:10%;width:12px;height:12px;border-radius:50%;background:#4a8b8c;opacity:.3;pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;bottom:70px;right:14%;width:7px;height:7px;border-radius:50%;background:#d4a882;opacity:.35;pointer-events:none;z-index:0;"></div>
+
+    <div class="relative max-w-5xl mx-auto text-center" style="z-index:2;">
+      <div class="inline-block px-5 py-2 rounded-full shadow-sm mb-6 badge">
+        <span class="text-sm font-semibold tracking-wide uppercase text-white">Бесплатный Вебинар</span>
       </div>
-      <h1 class="heading-font text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style="color: #1e4158;">Эмоциональный интеллект: модный термин или главный фактор успеха современного преподавателя?</h1>
-      <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed" style="color: #495057;">Бесплатный вебинар о том, как адаптировать педагогический подход к реальности 2026 года, избежать выгорания и стать востребованным ментором.</p>
-      <div class="flex flex-wrap justify-center gap-6 mb-10 text-base md:text-lg font-medium" style="color: #2c5f7c;">
-        <div class="flex items-center gap-2"><span>📅</span><span>Дата: 25.02.2026</span></div>
-        <div class="flex items-center gap-2"><span>⏰</span><span>Время: 18:00 (UTC+3)</span></div>
-        <div class="flex items-center gap-2"><span>⏱️</span><span>Длительность: 1,5 часа</span></div>
+      <h1 class="heading-font text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style="color:#335f60;">Эмоциональный интеллект: модный термин или главный фактор успеха современного преподавателя?</h1>
+      <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed" style="color:#4a6060;">Бесплатный вебинар о том, как адаптировать педагогический подход к реальности 2026 года, избежать выгорания и стать востребованным ментором.</p>
+      <div class="flex flex-wrap justify-center gap-6 mb-4 text-base md:text-lg font-medium" style="color:#4a8b8c;">
+        <div class="flex items-center gap-2">📅 <span>Дата: 07.03.2026</span></div>
+        <div class="flex items-center gap-2">⏰ <span>Время: 18:00 (UTC+3)</span></div>
+        <div class="flex items-center gap-2">⏱️ <span>Длительность: 1,5 часа</span></div>
       </div>
-      <p class="text-sm mb-8" style="color: #6c757d;">60 мин. контента + 30 мин. ответы на вопросы</p>
-      <a href="#registration" class="cta-button inline-block px-10 py-4 text-white text-lg font-semibold rounded-full">ЗАРЕГИСТРИРОВАТЬСЯ БЕСПЛАТНО</a>
+      <div class="countdown-wrap" id="countdown">
+        <div class="countdown-box"><div class="countdown-num" id="cd-days">00</div><div class="countdown-label">дней</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-box"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-label">часов</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-box"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-label">минут</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-box"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-label">секунд</div></div>
+      </div>
+      <p class="text-sm mt-6 mb-8" style="color:#7a8a89;">60 мин. контента + 30 мин. ответы на вопросы</p>
+      <a href="#registration" class="cta-button px-10 py-4 text-white text-lg font-semibold rounded-full">ЗАРЕГИСТРИРОВАТЬСЯ БЕСПЛАТНО</a>
     </div>
   </section>
 
-  <!-- World Changed -->
-  <section class="w-full py-16 px-6">
-    <div class="max-w-5xl mx-auto">
+  <!-- ══════════════════════════════════════
+       WORLD CHANGED
+  ══════════════════════════════════════ -->
+  <section class="sec-rel w-full py-16 px-6 bg-white-sec">
+    <!-- Blob top-right beige -->
+    <svg class="blob" style="top:-40px;right:-50px;width:220px;opacity:.12;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#d4a882" d="M50,-70C62,-60,68,-44,70,-28C72,-12,70,4,64,18C58,32,48,44,36,54C24,64,10,72,-6,72C-22,72,-40,64,-52,52C-64,40,-70,24,-68,8C-66,-8,-56,-24,-44,-38C-32,-52,-18,-64,0,-66C18,-68,38,-80,50,-70Z" transform="translate(100 100)"/>
+    </svg>
+    <!-- dot grid bottom-left -->
+    <div style="position:absolute;bottom:0;left:0;width:180px;height:160px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid-beige"></div>
+    </div>
+    <div class="max-w-5xl mx-auto" style="position:relative;z-index:2;">
       <div class="section-card p-8 md:p-12">
-        <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color: #1e4158;">Мир изменился. А ваш подход?</h2>
+        <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color:#335f60;">Мир изменился. А ваш подход?</h2>
         <div class="accent-line"></div>
-        <p class="text-lg text-center mb-10 max-w-3xl mx-auto" style="color: #495057;">Мы живем в эпоху, где технологии меняются быстрее, чем вы успеваете написать планы уроков. Дети и взрослые сегодня — это "новые люди", с иным типом восприятия, работы мозга и требованиями к обучению.</p>
+        <p class="text-lg text-center mb-10 max-w-3xl mx-auto" style="color:#4a6060;">Мы живем в эпоху, где технологии меняются быстрее, чем вы успеваете написать планы уроков. Дети и взрослые сегодня — это "новые люди", с иным типом восприятия, работы мозга и требованиями к обучению.</p>
         <div class="grid md:grid-cols-3 gap-8">
           <div class="text-center">
-            <div class="icon-box mx-auto">💭</div>
-            <h3 class="text-xl font-semibold mb-3" style="color: #2c5f7c;">Клиповое мышление</h3>
-            <p style="color: #6c757d;">Старые методы удержания дисциплины больше не работают</p>
+            <div class="icon-box mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <path d="M2 9h20"/><path d="M2 15h20"/>
+                <path d="M7 5v4"/><path d="M12 5v4"/><path d="M17 5v4"/>
+                <path d="M7 15v4"/><path d="M12 15v4"/><path d="M17 15v4"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3" style="color:#4a8b8c;">Клиповое мышление</h3>
+            <p style="color:#7a8a89;">Старые методы удержания дисциплины больше не работают</p>
           </div>
           <div class="text-center">
-            <div class="icon-box mx-auto">🤖</div>
-            <h3 class="text-xl font-semibold mb-3" style="color: #2c5f7c;">ИИ и доступность знаний</h3>
-            <p style="color: #6c757d;">Преподаватель перестал быть единственным источником информации</p>
+            <div class="icon-box mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3" style="color:#4a8b8c;">ИИ и доступность знаний</h3>
+            <p style="color:#7a8a89;">Преподаватель перестал быть единственным источником информации</p>
           </div>
           <div class="text-center">
-            <div class="icon-box mx-auto">🧠</div>
-            <h3 class="text-xl font-semibold mb-3" style="color: #2c5f7c;">Другой мозг</h3>
-            <p style="color: #6c757d;">Скорость обработки данных выросла, но потребность в глубоком человеческом контакте стала критической</p>
+            <div class="icon-box mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="7" r="3"/>
+                <path d="M6 21v-2a4 4 0 0 1 4-4h1"/>
+                <path d="M16 11c.6-.6 1-1.4 1-2.3a3.3 3.3 0 0 0-3-3.3"/>
+                <path d="M18.5 8.5c1 1 1.5 2.2 1.5 3.5 0 2.5-2 4.5-4.5 4.5"/>
+                <path d="M21 6c1.5 1.5 2 3.5 2 5.5 0 4-3 7-7 7"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3" style="color:#4a8b8c;">Другой мозг</h3>
+            <p style="color:#7a8a89;">Скорость обработки данных выросла, но потребность в глубоком человеческом контакте стала критической</p>
           </div>
         </div>
-        <div class="mt-12 p-6 rounded-xl text-center" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
-          <p class="text-xl font-semibold" style="color: #1e4158;">В 2026 году выигрывает не тот, кто знает больше всех, а тот, кто умеет управлять эмоциями — своими и своих учеников.</p>
+        <div class="mt-12 p-6 rounded-xl text-center highlight-box">
+          <p class="text-xl font-semibold" style="color:#335f60;">В 2026 году выигрывает не тот, кто знает больше всех, а тот, кто умеет управлять эмоциями — своими и своих учеников.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- For Whom -->
-  <section class="w-full py-16 px-6" style="background: white;">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color: #1e4158;">Для кого этот вебинар?</h2>
+  <!-- ══════════════════════════════════════
+       FOR WHOM
+  ══════════════════════════════════════ -->
+  <section class="sec-rel w-full py-16 px-6 bg-cream">
+    <!-- blob top-left teal -->
+    <svg class="blob" style="top:-50px;left:-60px;width:260px;opacity:.14;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4a8b8c" d="M46,-68C57,-58,62,-42,66,-26C70,-10,72,6,68,22C64,38,54,54,40,64C26,74,8,78,-10,74C-28,70,-46,58,-58,42C-70,26,-76,6,-72,-12C-68,-30,-54,-46,-40,-58C-26,-70,-12,-78,4,-76C20,-74,35,-78,46,-68Z" transform="translate(100 100)"/>
+    </svg>
+    <!-- dot top-right -->
+    <div style="position:absolute;top:0;right:0;width:220px;height:200px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid-beige"></div>
+    </div>
+    <!-- small accent circles -->
+    <div style="position:absolute;top:30px;right:8%;width:16px;height:16px;border-radius:50%;background:#4a8b8c;opacity:.2;pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;top:60px;right:12%;width:9px;height:9px;border-radius:50%;background:#d4a882;opacity:.3;pointer-events:none;z-index:0;"></div>
+
+    <div class="max-w-5xl mx-auto" style="position:relative;z-index:2;">
+      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color:#335f60;">Для кого этот вебинар?</h2>
       <div class="accent-line"></div>
-      <p class="text-lg text-center mb-10" style="color: #495057;">Этот вебинар для преподавателей, которые:</p>
+      <p class="text-lg text-center mb-10" style="color:#4a6060;">Этот вебинар для преподавателей, которые:</p>
       <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl">✓</span><p style="color: #495057;">Хотят идти в ногу со временем и не бояться конкуренции с технологиями</p></div>
-        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl">✓</span><p style="color: #495057;">Стремятся к материальному успеху и высокому чеку за счет уникальной ценности</p></div>
-        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl">✓</span><p style="color: #495057;">Хотят видеть очередь из благодарных клиентов, которые возвращаются и рекомендуют вас</p></div>
-        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl">✓</span><p style="color: #495057;">Чувствуют, что старые инструменты «буксуют», и ищут современные ключи к мотивации студентов</p></div>
+        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl check-icon font-bold">✓</span><p style="color:#4a6060;">Хотят идти в ногу со временем и не бояться конкуренции с технологиями</p></div>
+        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl check-icon font-bold">✓</span><p style="color:#4a6060;">Стремятся к материальному успеху и высокому чеку за счет уникальной ценности</p></div>
+        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl check-icon font-bold">✓</span><p style="color:#4a6060;">Хотят видеть очередь из благодарных клиентов, которые возвращаются и рекомендуют вас</p></div>
+        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl check-icon font-bold">✓</span><p style="color:#4a6060;">Чувствуют, что старые инструменты «буксуют», и ищут современные ключи к мотивации студентов</p></div>
+        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl check-icon font-bold">✓</span><p style="color:#4a6060;">Хотят быть эмоционально стабильными и перестать работать в постоянном стрессе</p></div>
+        <div class="section-card p-6 flex items-start gap-4"><span class="text-2xl check-icon font-bold">✓</span><p style="color:#4a6060;">Хотят правильно выстроить свои рабочие и личные границы, не отталкивая клиентов</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Program -->
-  <section class="w-full py-16 px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color: #1e4158;">О чем мы поговорим за 90 минут</h2>
+  <!-- ══════════════════════════════════════
+       PROGRAM
+  ══════════════════════════════════════ -->
+  <section class="sec-rel w-full py-16 px-6 bg-light">
+    <!-- blob bottom-right beige -->
+    <svg class="blob" style="bottom:-50px;right:-60px;width:280px;opacity:.15;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#d4a882" d="M42,-62C53,-52,60,-38,64,-24C68,-10,68,4,64,18C60,32,52,46,40,56C28,66,12,72,-4,70C-20,68,-38,58,-52,44C-66,30,-76,12,-74,-6C-72,-24,-58,-42,-42,-54C-26,-66,-8,-72,8,-70C24,-68,31,-72,42,-62Z" transform="translate(100 100)"/>
+    </svg>
+    <!-- dot top-left -->
+    <div style="position:absolute;top:0;left:0;width:200px;height:180px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto" style="position:relative;z-index:2;">
+      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color:#335f60;">О чем мы поговорим за 90 минут</h2>
       <div class="accent-line"></div>
       <div class="space-y-6 max-w-3xl mx-auto">
         <div class="section-card p-6 flex items-start gap-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white" style="background: #2c5f7c;">1</div>
-          <p class="text-lg" style="color: #495057;">Эмоциональный интеллект, что же стоит за этим названием?</p>
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white num-bubble">1</div>
+          <p class="text-lg" style="color:#4a6060;">Эмоциональный интеллект, что же стоит за этим названием?</p>
         </div>
         <div class="section-card p-6 flex items-start gap-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white" style="background: #2c5f7c;">2</div>
-          <p class="text-lg" style="color: #495057;">Реальные примеры того, как отсутствие навыков EQ влияют на вашу работу, прогресс ваших студентов, ваш успех, как преподавателя</p>
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white num-bubble">2</div>
+          <p class="text-lg" style="color:#4a6060;">Реальные примеры того, как отсутствие навыков EQ влияют на вашу работу, прогресс ваших студентов, ваш успех, как преподавателя</p>
         </div>
         <div class="section-card p-6 flex items-start gap-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white" style="background: #2c5f7c;">3</div>
-          <p class="text-lg" style="color: #495057;">Преподаватель как бренд и лидер</p>
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white num-bubble">3</div>
+          <p class="text-lg" style="color:#4a6060;">Преподаватель как бренд и лидер</p>
         </div>
         <div class="section-card p-6 flex items-start gap-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white" style="background: #2c5f7c;">4</div>
-          <p class="text-lg" style="color: #495057;">Практический разбор: 3 реальные ситуации, которые мешают вам расти, и как их решить с помощью инструментов EQ</p>
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white num-bubble">4</div>
+          <p class="text-lg" style="color:#4a6060;">Практический разбор: 3 реальные ситуации, которые мешают вам расти, и как их решить с помощью инструментов EQ</p>
         </div>
         <div class="section-card p-6 flex items-start gap-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white" style="background: #2c5f7c;">5</div>
-          <p class="text-lg" style="color: #495057;">Ответим на ваши вопросы</p>
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white num-bubble">5</div>
+          <p class="text-lg" style="color:#4a6060;">Ответим на ваши вопросы</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Speakers -->
-  <section class="w-full py-16 px-6" style="background: white;">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color: #1e4158;">Ведущие вебинара</h2>
+  <!-- ══════════════════════════════════════
+       REVIEWS
+  ══════════════════════════════════════ -->
+  <section class="sec-rel w-full py-16 px-6 bg-white-sec">
+    <!-- blob top-right teal -->
+    <svg class="blob" style="top:-40px;right:-50px;width:240px;opacity:.13;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4a8b8c" d="M48,-70C60,-60,66,-44,68,-28C70,-12,68,4,62,18C56,32,46,44,34,54C22,64,8,72,-8,72C-24,72,-42,64,-54,52C-66,40,-72,24,-70,8C-68,-8,-58,-24,-46,-38C-34,-52,-20,-64,-4,-66C12,-68,36,-80,48,-70Z" transform="translate(100 100)"/>
+    </svg>
+    <!-- dot bottom-left beige -->
+    <div style="position:absolute;bottom:0;left:0;width:200px;height:180px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid-beige"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto" style="position:relative;z-index:2;">
+      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color:#335f60;">Что говорят про наш вебинар?</h2>
+      <div class="accent-line"></div>
+      <div class="grid md:grid-cols-3 gap-8 mt-10">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">«Бесценно для работы со студентами всех возрастов. Спасибо за интересную и полезную информацию! Как человек, который работает со взрослыми студентами, но также имеет опыт репетиторства с подростками и младшими школьниками, я считаю, что прозвучавшие здесь идеи невероятно актуальны и важны».</p>
+          <div class="review-author">— Лариса</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">«Это был очень интересный вебинар. К сожалению, на собственном горьком опыте я поняла, как важно выстраивать личные границы в этой профессии. Я очень благодарна спикерам и организаторам за обсуждение такой жизненно важной темы!».</p>
+          <div class="review-author">— Анна</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">«Работа в общеобразовательной школе часто напоминает эмоциональные качели, особенно когда речь идет о непростых отношениях с некоторыми подростками. Эта встреча дала мне понимание, что такое состояние не является нормой, а также инструменты для работы со своим состоянием и с процессом взаимодействия со студентами».</p>
+          <div class="review-author">— Наталья</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SPEAKERS
+  ══════════════════════════════════════ -->
+  <section class="sec-rel w-full py-16 px-6 bg-cream">
+    <!-- large blob bottom-right teal -->
+    <svg class="blob" style="bottom:-70px;right:-80px;width:340px;opacity:.13;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4a8b8c" d="M52,-76C64,-66,70,-50,72,-34C74,-18,72,-2,66,12C60,26,50,38,38,50C26,62,12,74,-4,76C-20,78,-38,70,-52,58C-66,46,-76,30,-76,14C-76,-2,-66,-18,-56,-34C-46,-50,-36,-66,-22,-72C-8,-78,6,-74,20,-68C34,-62,40,-86,52,-76Z" transform="translate(100 100)"/>
+    </svg>
+    <!-- dot top-left -->
+    <div style="position:absolute;top:0;left:0;width:220px;height:200px;overflow:hidden;pointer-events:none;z-index:0;">
+      <div class="dot-grid"></div>
+    </div>
+    <!-- accent circles -->
+    <div style="position:absolute;top:40px;right:6%;width:18px;height:18px;border-radius:50%;background:#d4a882;opacity:.25;pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;top:80px;right:10%;width:10px;height:10px;border-radius:50%;background:#4a8b8c;opacity:.25;pointer-events:none;z-index:0;"></div>
+
+    <div class="max-w-5xl mx-auto" style="position:relative;z-index:2;">
+      <h2 class="heading-font text-3xl md:text-4xl font-bold text-center mb-4" style="color:#335f60;">Ведущие вебинара</h2>
       <div class="accent-line"></div>
       <div class="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12">
         <div class="speaker-card">
-          <img src="valeriia.jpg" alt="Валерия Баканова" class="speaker-img" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%)';">
+          <img src="valeriia.jpg" alt="Валерия Баканова" class="speaker-img" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#ddeae9,#c8dedd)';">
           <div class="p-6">
-            <h3 class="text-2xl font-bold mb-3" style="color: #1e4158;">Валерия Баканова</h3>
-            <ul class="space-y-2 text-base" style="color: #495057;">
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Professional Neurolanguage Coach и Teacher Trainer</span></li>
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Преподаватель английского с 20-летним опытом</span></li>
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Основатель языковой школы</span></li>
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Эксперт по внедрению нейронауки в педагогическую практику</span></li>
+            <h3 class="text-2xl font-bold mb-3" style="color:#335f60;">Валерия Баканова</h3>
+            <ul class="space-y-2 text-base" style="color:#4a6060;">
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Professional Neurolanguage Coach и Teacher Trainer</span></li>
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Преподаватель английского с 20-летним опытом</span></li>
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Основатель языковой школы</span></li>
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Эксперт по внедрению нейронауки в педагогическую практику</span></li>
             </ul>
           </div>
         </div>
         <div class="speaker-card">
-          <img src="natalia.jpg" alt="Наталья Шубникова" class="speaker-img" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%)';">
+          <img src="natalia.jpg" alt="Наталья Шубникова" class="speaker-img" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#ddeae9,#c8dedd)';">
           <div class="p-6">
-            <h3 class="text-2xl font-bold mb-3" style="color: #1e4158;">Наталья Шубникова</h3>
-            <ul class="space-y-2 text-base" style="color: #495057;">
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Professional Life &amp; Business Strategic Coach</span></li>
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Эксперт по управлению бизнесом</span></li>
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>В прошлом — топ-менеджер и сооснователь IT-компании</span></li>
-              <li class="flex items-start gap-2"><span class="flex-shrink-0 mt-1">•</span><span>Специалист по стратегическому развитию личности и карьеры</span></li>
+            <h3 class="text-2xl font-bold mb-3" style="color:#335f60;">Наталья Шубникова</h3>
+            <ul class="space-y-2 text-base" style="color:#4a6060;">
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Professional Life &amp; Business Strategic Coach</span></li>
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Эксперт по управлению бизнесом</span></li>
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>В прошлом — топ-менеджер и сооснователь IT-компании</span></li>
+              <li class="flex items-start gap-2"><span style="color:#d4a882;flex-shrink:0;margin-top:2px;">•</span><span>Специалист по стратегическому развитию личности и карьеры</span></li>
             </ul>
           </div>
         </div>
@@ -160,17 +367,53 @@
     </div>
   </section>
 
-  <!-- Registration -->
-  <section id="registration" class="w-full py-16 px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <a href="https://shorturl.at/qHKsg" target="_blank" rel="noopener noreferrer" class="cta-button inline-block px-12 py-5 text-white text-xl font-bold rounded-full">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+  <!-- ══════════════════════════════════════
+       REGISTRATION
+  ══════════════════════════════════════ -->
+  <section id="registration" class="sec-rel w-full py-16 px-6 bg-light">
+    <!-- blob left teal -->
+    <svg class="blob" style="top:50%;left:-60px;transform:translateY(-50%);width:200px;opacity:.14;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4a8b8c" d="M40,-58C50,-48,56,-34,58,-20C60,-6,58,8,52,22C46,36,36,50,22,58C8,66,-10,68,-26,62C-42,56,-56,42,-62,26C-68,10,-66,-8,-60,-24C-54,-40,-44,-54,-30,-60C-16,-66,2,-64,18,-58C34,-52,30,-68,40,-58Z" transform="translate(100 100)"/>
+    </svg>
+    <!-- blob right beige -->
+    <svg class="blob" style="top:50%;right:-60px;transform:translateY(-50%);width:200px;opacity:.16;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#d4a882" d="M44,-62C54,-52,58,-38,60,-24C62,-10,62,4,58,18C54,32,46,46,34,56C22,66,6,72,-10,70C-26,68,-44,58,-56,44C-68,30,-74,12,-72,-6C-70,-24,-60,-42,-46,-54C-32,-66,-14,-72,2,-70C18,-68,34,-72,44,-62Z" transform="translate(100 100)"/>
+    </svg>
+    <div class="max-w-3xl mx-auto text-center" style="position:relative;z-index:2;">
+      <a href="https://shorturl.at/qHKsg" target="_blank" rel="noopener noreferrer" class="cta-button px-12 py-5 text-white text-xl font-bold rounded-full">ЗАРЕГИСТРИРОВАТЬСЯ</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="w-full py-8 px-6 text-center" style="background: white; border-top: 1px solid #e9ecef;">
-    <p style="color: #6c757d;">© 2026 Все права защищены</p>
+  <footer class="w-full py-8 px-6 text-center" style="background:#fff;border-top:1px solid #dde8e7;">
+    <p style="color:#7a8a89;">© 2026 Все права защищены</p>
   </footer>
 
+  <script>
+    // Countdown
+    const target = new Date('2026-03-07T18:00:00+03:00');
+    function updateCountdown() {
+      const diff = target - new Date();
+      if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent='00'); return; }
+      const pad = n => String(n).padStart(2,'0');
+      document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
+      document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
+      document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
+      document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Floating EQ
+    const layer = document.getElementById('bgFloatLayer');
+    for (let i = 0; i < 7; i++) {
+      const el = document.createElement('div');
+      el.className = 'bg-float is-text';
+      const size = 28 + Math.random() * 36;
+      el.style.cssText = `left:${Math.random()*96}%;top:${Math.random()*96}%;transform:rotate(${(Math.random()-.5)*40}deg);font-size:${size*.85}px;`;
+      el.textContent = 'EQ';
+      layer.appendChild(el);
+    }
+  </script>
 </body>
 </html>
